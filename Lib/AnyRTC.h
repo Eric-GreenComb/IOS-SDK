@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger,AnyRTCErrorCode){
  *  @param developerID      the developer ID of AnyRTC on the platform
  *  @param token            the user's app token on the platform
  *  @param appKey           the user's app key on the platform
- *  @param appId            the user's bun on the platform
+ *  @param appId            the user's app Name on the platform
  */
 
 + (void)InitAnyRTCWithKey:(NSString*)developerID
