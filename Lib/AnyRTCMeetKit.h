@@ -11,114 +11,122 @@
 
 @protocol AnyRTCMeetDelegate <NSObject>
 
-/** Enter metting secuess
+/**
+ *  Enter metting secuess
  *
- * @param strAnyrtcId	AnyRTC的ID
+ *  @param strAnyrtcId AnyRTC的ID
  */
 - (void) OnRtcJoinMeetOK:(NSString*) strAnyrtcId;
 
-/** Enter metting failed
+/**
+ *  Enter metting failed
  *
- * @param strAnyrtcId	AnyRTC的ID
- * @param code	 error code
- * @param strReason		The reason for the error
+ *  @param strAnyrtcId AnyRTC的ID
+ *  @param code        error code
+ *  @param strReason   The reason for the error
  */
 - (void) OnRtcJoinMeetFailed:(NSString*) strAnyrtcId withCode:(AnyRTCErrorCode)code withReason:(NSString*) strReason;
 
-/** Leave meeting
+/**
+ *  Leave meeting
  *
- *  node：abnormal exit or when there will be the callback is put forward
+ *  @param code if code is zero is leave meeting scuess,other abnormal or failure
  */
 - (void) OnRtcLeaveMeet:(int) code;
-/** Video  window size
+
+/**
+ *  Video  window size
  *
- * @param videoView	  Video view
- * @param size  the size of video view
+ *  @param videoView Video view
+ *  @param size      the size of video view
  */
 - (void) OnRtcVideoView:(UIView*)videoView didChangeVideoSize:(CGSize)size;
-/** The remote view into the meeting
+
+/**
+ *  The remote view into the meeting
  *
- *  @param channelID   channel id
- *  @param remoteView  the remote view
+ *  @param channelID  channel id
+ *  @param removeView the remote view
  */
 - (void) OnRtcOpenRemoteView:(NSString*)channelID  withRemoteView:(UIView *)removeView;
 
-/** The remote view leave the meeting
+/**
+ *  The remote view leave the meeting
  *
- *  @param channelID  channel id
+ *  @param channelID channel id
  */
 - (void)OnRtcRemoveRemoteView:(NSString*)channelID;
 
-/** State of the remote video audio and video
+/**
+ *  State of the remote video audio and video
  *
  *  @param channelID   channel id
- *  @param audioEnable  if the audioEnable is ture/false,the remote audio is close/open
- *  @param videoEnable  if the videoEnable is ture/false,the remote video is close/open
+ *  @param audioEnable if the audioEnable is ture/false,the remote audio is close/open
+ *  @param videoEnable if the videoEnable is ture/false,the remote video is close/open
  */
 - (void)OnRtcRemoteAVStatus:(NSString*)channelID withAudioEnable:(BOOL)audioEnable withVideoEnable:(BOOL)videoEnable;
-@end
-
-
-@interface AnyRTCMeetVideoItem : NSObject
-
-@property (nonatomic, strong) UIView *videoView;   // local or remote view
-@property (nonatomic, strong) NSString *channelID; // the user channel ID of view
-@property (nonatomic) BOOL isBack;                 // the direction of local camera (default is NO) ,if the video is remote ,the parameter is failure (Recommended not to set up)
-@property (nonatomic) CGSize videoSize;            // record the video size
-
 @end
 
 
 @interface AnyRTCMeetKit : NSObject {
     
 }
-/**Initializes the AnyRTCMeetKit object.
+
+/**
+ *  Initializes the AnyRTCMeetKit object.
  *
- *  @param delegate
+ *  @param delegate      delegate
  *  @param localViewItem local video view parameter
  *
  *  @return an object of AnyRTCMeetKit class
  */
 - (instancetype)initWithDelegate:(id<AnyRTCMeetDelegate>)delegate
-               withLocalViewItem:(AnyRTCMeetVideoItem *)localViewItem;
+               withLocalViewItem:(AnyRTCVideoItem *)localViewItem;
 
-/** Join meeting
+/**
+ *  Join meeting
  *
- *  @param strAnyrtcId , meeting id
+ *  @param strAnyrtcId meeting id
+ *
+ *  @return enter meeting scuess or failure
  */
 - (BOOL) Join:(NSString*)strAnyrtcId;
 
-/** Leave meeting ,when you call this method,this class will be dealloc
- *
+/**
+ *  Leave meeting ,when you call this method,this class will be dealloc
  */
 - (void) Leave;
 
-/** SetLocalAudioEnable (default is YES)
+/**
+ *  SetLocalAudioEnable (default is YES)
  *
  *  @param enable set YES to enable, NO to disable.
  */
 - (void) SetLocalAudioEnable:(BOOL)enable;
 
-/** SetLocalVideoEnable (default is YES)
+/**
+ *  SetLocalVideoEnable (default is YES)
  *
  *  @param enable set YES to enable, NO to disable.
  */
 - (void) SetLocalVideoEnable:(BOOL)enable;
 
-/** SetSpeakerEnable (default is YES)
+/**
+ *  SetSpeakerEnable (default is YES)
  *
  *  @param enable set YES to enable, NO to disable.
  */
 - (void) SetSpeakerEnable:(BOOL)enable;
 
-/** SetproximityMonitoringEnabled  (default is NO)
+/**
+ *  SetproximityMonitoringEnabled  (default is NO)
  *
  *  @param enable set YES to enable, NO to disable.
  */
 - (void) SetproximityMonitoringEnabled:(BOOL)enable;
 
-/** SwitchCamera  font/back local camera
- *
+/**
+ *  SwitchCamera  font/back local camera
  */
 - (void) SwitchCamera;
 
