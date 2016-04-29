@@ -11,22 +11,28 @@
 #import "AnyRTCLive.h"
 
 @protocol AnyRTCLiveHostDelegate <AnyRTCLiveDelegate>
-/** Live infomation
- * @param strUrl            Rtmp/Hls url
- * @param strSessionId      SessionId
+/**
+ *  Live infomation
+ *
+ *  @param nsUrl        Rtmp/Hls url
+ *  @param nsSessionId  SessionId
  */
 -(void) OnRtcLiveInfomation:(NSString*)nsUrl withSessionId:(NSString*)nsSessionId;
 
-/** Guest want to line with you
- * @param strPeerId     Peer's ID
- * @param strUserName   Peer's user name
- * @param strBrief      A brief
+/**
+ *  Guest want to line with you
+ *
+ *  @param nsPeerId   Peer's ID
+ *  @param nsUserName Peer's user name
+ *  @param nsBrief    A brief
  */
 -(void) OnRtcLiveApplyLine:(NSString*)nsPeerId withUserName:(NSString*)nsUserName withBrief:(NSString*)nsBrief;
 
-/** Guest cancel line apply
- * @param strPeerId     Peer's ID
- * @param strUserName   Peer's user name
+/**
+ *  Guest cancel line apply
+ *
+ *  @param nsPeerId   Peer's ID
+ *  @param nsUserName Peer's user name
  */
 -(void) OnRtcLiveCancelLine:(NSString*)nsPeerId withUserName:(NSString*)nsUserName;
 @end
@@ -50,27 +56,37 @@
  *  Join Live
  *
  *  @param nsAnyrtcId  Anyrtc ID
- *  @param nsUserName  Username
+ *  @param nsCustomId  other's platform  user id
+ *  @param nsCustomName  other's platform  user name
  *  @param bCallIn     Enable line function
  *  @param bGetMemList Enable member list
  *
  *  @return true:sucess	false:failed
  */
--(BOOL) Join:(NSString*)nsAnyrtcId andUserName:(NSString*)nsUserName andEnableCallIn:(BOOL)bCallIn andEnableMemberList:(BOOL)bGetMemList;
+-(BOOL) Join:(NSString*)nsAnyrtcId  andCustomId:(NSString*)nsCustomId andCustomName:(NSString*)nsCustomName andEnableCallIn:(BOOL)bCallIn andEnableMemberList:(BOOL)bGetMemList;
 
-/** The host switch connection function
- * @param enable  ON/YES (open/close)
- * @return			true:scuess	false:failure
+/**
+ *  The host switch connection function
+ *
+ *  @param enable ON/YES (open/close)
+ *
+ *  @return true:scuess	false:failure
  */
 -(BOOL) SetLineEnable:(BOOL)enable;
 
-/** Host accept the connection
- * @param nsPeerId request connection Id
+/**
+ *  Host accept the connection
+ *
+ *  @param nsPeerId  request connection Id
+ *
+ *  @return ture:scuess false:failed
  */
--(void) AcceptApplyLine:(NSString*)nsPeerId;
+-(BOOL) AcceptApplyLine:(NSString*)nsPeerId;
 
-/** Host refused to the connection
- * @param nsPeerId request connection Id
+/**
+ *  Host refused to the connection
+ *
+ *  @param nsPeerId request connection Id
  */
 -(void) RejectApplyLine:(NSString*)nsPeerId;
 

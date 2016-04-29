@@ -43,16 +43,23 @@
  *  Join Live
  *
  *  @param nsAnyrtcId  Anyrtc ID
- *  @param nsUserName  Username
+ *  @param nsCustomId  other's platform  user id
+ *  @param nsCustomName  other's platform  user name
  *  @param bGetMemList Enable member list
  *
  *  @return true:sucess	false:failed
  */
--(BOOL) Join:(NSString*)nsAnyrtcId andUserName:(NSString*)nsUserName andEnableMemberList:(BOOL)bGetMemList;
+-(BOOL) Join:(NSString*)nsAnyrtcId andCustomId:(NSString*)nsCustomId  andCustomName:(NSString*)nsCustomName andEnableMemberList:(BOOL)bGetMemList;
 
-/** Apply line to anchor
- * @param strBrief  Brief, max characters is 36
+/**
+ *  Send message to host and other guest
+ *
+ *  @param nsContent  message
+ *
+ *  @return true:scuess false:failed
  */
+- (BOOL) SendUserMsg:(NSString*)nsContent;
+
 /**
  *  Apply link to host
  *

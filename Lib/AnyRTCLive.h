@@ -62,8 +62,9 @@
  *
  *  @param publishID  the channel of video
  *  @param removeView the video view
+ *  @param isHost  this param can judge this is host
  */
-- (void) OnRtcOpenRemoteView:(NSString*)publishID  withRemoteView:(UIView *)removeView;
+- (void) OnRtcOpenRemoteView:(NSString*)publishID  withRemoteView:(UIView *)removeView withIsHost:(BOOL)isHost;
 
 /**
  *  Other video view leave the living meeting
@@ -81,6 +82,36 @@
  */
 - (void)OnRtcRemoteAVStatus:(NSString*)publishID withAudioEnable:(BOOL)audioEnable withVideoEnable:(BOOL)videoEnable;
 
+/**
+ *  Messages
+ *
+ *  @param nsCustomId other's platform  user id
+ *  @param nsCustomName other's platform  user nick name
+ *  @param nsContent  message
+ */
+- (void)OnRtcLiveUserMsg:(NSString*)nsCustomId withNikeName:(NSString*)nsCustomName withContent:(NSString*)nsContent;
+
+/**
+ *  All member count in this live.
+ *
+ *  @param nTotal all member count
+ */
+- (void)OnRtcLiveNumberOfMember:(int)nTotal;
+
+/**
+ *   Got online member
+ *
+ *  @param nsCustomId other's platform  user id
+ *  @param nsCustomName other's platform  user nike name
+ */
+- (void)OnRtcLiveMemberOnline:(NSString*)nsCustomId withCustomName:(NSString*)nsCustomName;
+
+/**
+ *  Got offline member
+ *
+ *  @param nsCustomId other's platform  user id
+ */
+- (void)OnRtcLiveMemberOffline:(NSString*)nsCustomId;
 @end
 
 @interface AnyRTCLive : NSObject {
@@ -90,10 +121,13 @@
     BOOL        _hoster;
     NSString*   _nsAnyrtcId;
     BOOL        _applyChat;
+    NSString*   _nsUserName;
+    NSString *  _nsNickName;
+    NSString*   _nsLinedPeerID;
 }
 
 - (instancetype)initWithDelegate:(id<AnyRTCLiveDelegate>)delegate withLocalViewItem:(AnyRTCVideoItem *)localViewItem;
-- (BOOL) JoinLive:(NSString*)strAnyrtcId andUserName:(NSString*)nsUserName andEnableCallIn:(BOOL)bCallIn andEnableMemberList:(BOOL)bGetMemList;
+- (BOOL) JoinLive:(NSString*)strAnyrtcId andCustomId:(NSString*)nsCustomID andCustomName:(NSString*)nsCustomName andEnableCallIn:(BOOL)bCallIn andEnableMemberList:(BOOL)bGetMemList;
 - (void) SendNotify:(NSString*)nsBody;
 - (void) CloseGuestChannel;
 

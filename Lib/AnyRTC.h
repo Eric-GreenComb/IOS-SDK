@@ -10,7 +10,8 @@
 
 typedef NS_ENUM(NSInteger,AnyRTCErrorCode){
     AnyRTC_UNKNOW = 0,       // unknow error
-    AnyRTC_NET_ERR = 100,    // new error
+    AnyRTC_NET_ERR = 100,    // net error
+    AnyRTC_LIVE_ERR = 101,   // live error
     AnyRTC_BAD_REQ = 201,    // service request does not support the mistake
     AnyRTC_AUTH_FAIL = 202,	 // authentication failed
     AnyRTC_NO_USER = 203,	 // the developer information does not exist
